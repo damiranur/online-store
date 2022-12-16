@@ -1,0 +1,25 @@
+.item-category {
+    color: wheat;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+}
+
+.item-active label,
+.item-active span {
+    color: #f8cc7b;
+}
+
+.item-category label {
+    overflow: hidden;
+    padding: 0.3rem;
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.item-category span {
+    margin-left: auto;
+    padding-left: 0.3rem rem;
+    color: wheat;
+}

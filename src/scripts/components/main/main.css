@@ -1,0 +1,9 @@
+* {
+    box-sizing: border-box;
+}
+main {
+    min-height: 85vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}

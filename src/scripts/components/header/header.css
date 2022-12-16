@@ -1,0 +1,129 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Open Sans';
+}
+
+.header {
+    width: 100%;
+    /* position: fixed; */
+    background-color: #f3f5fa;
+    box-shadow: 0px 0px 7px 1px rgb(0 0 0 / 39%);
+    z-index: 2;
+}
+
+.container {
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    height: 10vh;
+    width: 100%;
+    background-color: #181a1c;
+    color: orange;
+    border-bottom: 2px solid orange;
+    border-radius: 0 0 1.5rem 1.5rem;
+    display: flex;
+    align-items: center;
+    padding-left: 2%;
+    padding-right: 2%;
+    overflow: hidden;
+    justify-content: space-between;
+}
+/* .header__container {
+    height: 150px;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+} */
+
+.brand {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.header__logo {
+    width: 5rem;
+    padding-bottom: 5rem;
+    background-image: url(../../../assets/svg/store-2017.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.header__title {
+    margin: 3px 0 0 0;
+    position: relative;
+    font-size: 50px;
+    font-weight: normal;
+    color: orange;
+    opacity: 0.9;
+    text-shadow: 2px 1px 11px rgb(0 0 0 / 14%);
+    cursor: context-menu;
+    margin-left: 1rem;
+}
+.total-price {
+    display: block;
+    font-size: 30px;
+}
+
+.total-price span {
+    color: wheat;
+    font-weight: 700;
+    font-size: 30px;
+}
+.cart {
+    position: relative;
+    width: 4rem;
+    height: 4rem;
+    background-image: url(../../../assets/svg/cart.svg);
+    background-repeat: no-repeat;
+    background-size: 80%;
+    background-position: center;
+}
+.cart__text {
+    position: absolute;
+    right: 0rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 1.7rem;
+    height: 1.7rem;
+    border-radius: 50%;
+    font-size: 1rem;
+    font-weight: bold;
+    line-height: 2rem;
+    color: #fff;
+    background-color: wheat;
+}
+
+.advert {
+    overflow: hidden;
+    width: 100%;
+    background-color: red;
+    margin: 15px 0;
+}
+
+.advert__inner {
+    display: flex;
+    animation: Sale 10s linear infinite;
+}
+
+@keyframes Sale {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(-160%, 0);
+    }
+}
+
+.advert__inner div {
+    flex-shrink: 0;
+    width: 300px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+}
