@@ -9,6 +9,10 @@
 .item-active span {
     color: #f8cc7b;
 }
+.item-not-active label,
+.item-not-active span {
+    color: #968566;
+}
 
 .item-category label {
     overflow: hidden;
@@ -20,6 +24,23 @@
 
 .item-category span {
     margin-left: auto;
-    padding-left: 0.3rem rem;
-    color: wheat;
+    padding-left: 0.3rem;
+}
+
+input:checked {
+    cursor: grab;
+    height: 1.1rem;
+    width: 1.1rem;
+    accent-color: orange;
+}
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #181a1c;
+    border-radius: 20px;
+    border: 2px solid orange;
+}
+::-webkit-scrollbar-track {
+    background: orange;
 }
