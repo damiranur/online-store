@@ -2,7 +2,7 @@ import './checkbox.css';
 
 export const checkbox = (id: string, label: string, span: string, onChange: (e: Event) => void): HTMLElement => {
     const itemCategory: HTMLElement = document.createElement('div');
-    itemCategory.className = 'item-category  item-not-active';
+    itemCategory.className = 'item-category item-active';
 
     const inputElement = document.createElement('input');
     inputElement.setAttribute('type', 'checkbox');
