@@ -2,7 +2,6 @@ import { filterBoxes } from './../filterBoxes/filterBoxes';
 import { checkbox } from '../checkbox/checkbox';
 import * as products from '../../common/products.json';
 
-import './brand.css';
 import * as uniqBrand from '../../common/uniqBrand.json';
 
 const filterList = document.createElement('div');

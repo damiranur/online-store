@@ -1,7 +1,7 @@
 import { filterBoxes } from './../filterBoxes/filterBoxes';
 import { checkbox } from '../checkbox/checkbox';
 import * as products from '../../common/products.json';
-import './category.css';
+
 import * as uniqCategory from '../../common/uniqCategory.json';
 
 const filterList = document.createElement('div');
