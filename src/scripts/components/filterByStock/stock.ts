@@ -2,18 +2,12 @@ import { filterBoxes } from './../filterBoxes/filterBoxes';
 import { multiRangeData, rangeData } from '../rangeData/rangeData';
 import { state } from '../../state/state';
 import './stock.css';
-import { filterProducts } from '../../state/actions';
 
 const filterList = document.createElement('div');
 filterList.className = 'filter-list';
 
 export const stock = filterBoxes('Stock', filterList);
 
-// const stockArr = state.products.map((product) => product.stock);
-// const minStock = Math.min.apply(null, stockArr);
-// const maxStock = Math.max.apply(null, stockArr);
-// let filtredMinStock;
-// let filtredMaxStock;
 const minGap = 0;
 
 const fromData = document.createElement('div');
@@ -56,9 +50,8 @@ function slideOne() {
         -minGap;
     }
 
-    state.filters.minStock = parseInt(startPoint.value);
-    fromData.textContent = `${state.filters.minStock}`;
-    filterProducts();
+    const filteredMinStock = startPoint.value.toString();
+    fromData.textContent = `${filteredMinStock}`;
 }
 
 function slideTwo() {
@@ -66,7 +59,6 @@ function slideTwo() {
         endPoint.value = startPoint.value;
         +minGap;
     }
-    state.filters.maxStock = parseInt(endPoint.value); //Math.floor((+endPoint.value * maxStock) / 100).toString();
-    toData.textContent = `${state.filters.maxStock}`;
-    filterProducts();
+    const filtredMaxStock = endPoint.value.toString();
+    toData.textContent = `${filtredMaxStock}`;
 }

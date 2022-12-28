@@ -24,6 +24,7 @@ export const checkbox = (
 
     const amounts = document.createElement('div');
     amounts.className = 'amounts';
+    amounts.setAttribute('data-name', id);
 
     const spanCurrentAmountOfProducts: HTMLSpanElement = document.createElement('span');
     spanCurrentAmountOfProducts.innerHTML = span1;

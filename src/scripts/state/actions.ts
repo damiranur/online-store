@@ -28,7 +28,6 @@ export const filterProducts = () => {
                 })
             );
         });
-        console.log('filteredProducts', filteredProducts);
     }
     if (state.filters.category.length > 0 && state.filters.brand.length === 0) {
         state.filters.category.forEach((filter) => {
@@ -38,7 +37,6 @@ export const filterProducts = () => {
                 })
             );
         });
-        console.log('filteredProducts', filteredProducts);
     }
 
     if (state.filters.category.length === 0 && state.filters.brand.length > 0) {
@@ -49,20 +47,17 @@ export const filterProducts = () => {
                 })
             );
         });
-        console.log('filteredProducts', filteredProducts);
     }
     filteredProducts = filteredProducts.filter((item) => {
         return item.price <= state.filters.maxPrice && item.price >= state.filters.minPrice;
     });
-    console.log('filteredProducts', filteredProducts);
 
     filteredProducts = filteredProducts.filter((item) => {
         return item.stock <= state.filters.maxStock && item.stock >= state.filters.minStock;
     });
-    console.log('filteredProducts', filteredProducts);
 
     state.filteredProducts = filteredProducts;
-    console.log('state.filteredProducts', state.filteredProducts);
+    console.log('filteredProducts', filteredProducts);
 
     const availableCategoryCount = state.filteredProducts
         .map((product) => product.category)
@@ -72,7 +67,6 @@ export const filterProducts = () => {
         }, {});
 
     state.availableCategoryCount = availableCategoryCount;
-    console.log('availableCategoryCount', availableCategoryCount);
 
     const availableBrandCount = state.filteredProducts
         .map((product) => product.brand)
@@ -81,16 +75,85 @@ export const filterProducts = () => {
             return acc;
         }, {});
     state.availableBrandCount = availableBrandCount;
-    console.log('availableBrandCount', availableBrandCount);
     updateUI();
 };
 
 function updateUI() {
     console.log('updateFilters');
+    updateCategoryFilter();
+    updateBrandFilter();
+    updatePriceFilter();
+    updateStockFilter();
 }
-// const rewriteCurrentAmount => {
-// document.querySelector('.amounts > span:first-child')
-// }
 
-// const parentEl = document.querySelector('.amounts > span:first-child');
-// console.log('parentEl', parentEl);
+const updateCategoryFilter = () => {
+    const filterBox = document.querySelector('.Category');
+    filterBox?.lastChild?.childNodes.forEach((checkboxWrapper) => {
+        const name = (checkboxWrapper.lastChild as HTMLElement)?.dataset.name;
+        if (name) {
+            (checkboxWrapper.lastChild?.firstChild as HTMLElement).innerHTML = `(${
+                state.availableCategoryCount[name] || '0'
+            }`;
+        } else {
+            (checkboxWrapper.lastChild?.firstChild as HTMLElement).innerHTML = `(0`;
+        }
+    });
+};
+
+const updateBrandFilter = () => {
+    const filterBox = document.querySelector('.Brand');
+    filterBox?.lastChild?.childNodes.forEach((checkboxWrapper) => {
+        const name = (checkboxWrapper.lastChild as HTMLElement)?.dataset.name;
+        if (name) {
+            (checkboxWrapper.lastChild?.firstChild as HTMLElement).innerHTML = `(${
+                state.availableBrandCount[name] || '0'
+            }`;
+        } else {
+            (checkboxWrapper.lastChild?.firstChild as HTMLElement).innerHTML = `(0`;
+        }
+    });
+};
+
+const updatePriceFilter = () => {
+    const priceArr = state.filteredProducts.map((product) => product.price);
+    const minPrice = Math.min.apply(null, priceArr);
+    const priceBox = document.querySelector('.Price');
+    (document.querySelector('.from-data') as HTMLDivElement).innerHTML = `€${minPrice}.00`;
+
+    (priceBox?.lastChild?.lastChild?.firstChild as HTMLInputElement).value = `${minPrice}`;
+
+    if (priceArr.length === 0) {
+        (document.querySelector('.from-data') as HTMLDivElement).innerHTML = `€${state.filters.minPrice}.00`;
+        (priceBox?.lastChild?.lastChild?.firstChild as HTMLInputElement).value = `${state.filters.minPrice}`;
+    }
+    const maxPrice = Math.max.apply(null, priceArr);
+    (document.querySelector('.to-data') as HTMLDivElement).innerHTML = `€${maxPrice}.00`;
+    (priceBox?.lastChild?.lastChild?.lastChild as HTMLInputElement).value = `${maxPrice}`;
+
+    if (priceArr.length === 0) {
+        (document.querySelector('.to-data') as HTMLDivElement).innerHTML = `€${state.filters.maxPrice}.00`;
+        (priceBox?.lastChild?.lastChild?.lastChild as HTMLInputElement).value = `${state.filters.maxPrice}`;
+    }
+};
+
+const updateStockFilter = () => {
+    const stockArr = state.filteredProducts.map((product) => product.stock);
+    const minStock = Math.min.apply(null, stockArr);
+    const stockBox = document.querySelector('.Stock');
+    (stockBox?.lastChild?.firstChild?.firstChild as HTMLDivElement).innerHTML = `${minStock}`;
+    (stockBox?.lastChild?.lastChild?.firstChild as HTMLInputElement).value = `${minStock}`;
+
+    if (stockArr.length === 0) {
+        (stockBox?.lastChild?.firstChild?.firstChild as HTMLDivElement).innerHTML = `${state.filters.minStock}`;
+        (stockBox?.lastChild?.lastChild?.firstChild as HTMLInputElement).value = `${state.filters.minStock}`;
+    }
+
+    const maxStock = Math.max.apply(null, stockArr);
+    (stockBox?.lastChild?.firstChild?.lastChild as HTMLDivElement).innerHTML = `${maxStock}`;
+    (stockBox?.lastChild?.lastChild?.lastChild as HTMLInputElement).value = `${maxStock}`;
+
+    if (stockArr.length === 0) {
+        (stockBox?.lastChild?.firstChild?.lastChild as HTMLDivElement).innerHTML = `${state.filters.maxStock}`;
+        (stockBox?.lastChild?.lastChild?.lastChild as HTMLInputElement).value = `${state.filters.maxStock}`;
+    }
+};

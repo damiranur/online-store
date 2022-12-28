@@ -1,6 +1,5 @@
 import { filterBoxes } from './../filterBoxes/filterBoxes';
 import { multiRangeData, rangeData } from '../rangeData/rangeData';
-// import * as products from '../../common/products.json';
 import { state } from './../../state/state';
 import './price.css';
 
@@ -9,11 +8,6 @@ filterList.className = 'filter-list';
 
 export const price = filterBoxes('Price', filterList);
 
-// const priceArr = products.products.map((product) => product.price);
-// const minPrice = Math.min.apply(null, priceArr);
-// const maxPrice = Math.max.apply(null, priceArr);
-// let filteredMinPrice;
-// let filteredMaxPrice;
 const minGap = 0;
 
 const fromData = document.createElement('div');

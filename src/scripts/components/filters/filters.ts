@@ -22,12 +22,6 @@ const copyLink = (e: MouseEvent) => {
 const buttonResetFilters = button('Reset filters', resetFilter);
 const buttonCopyLink = button('Copy Link', copyLink);
 
-// const addToCart = (e: MouseEvent) => {
-//     console.log('addToCart', e);
-// };
-
-// const buttonAddToCart = button('Add To Cart', addToCart);
-
 filters.append(resetTotal);
 resetTotal.append(buttonResetFilters);
 resetTotal.append(buttonCopyLink);
