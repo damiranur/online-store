@@ -1,8 +1,8 @@
 import { stock } from './../filterByStock/stock';
 import { price } from './../filterByPrice/price';
 import { button } from './../button/button';
-import { category } from '../filterByCategory/category';
-import { brand } from '../filterByBrand/brand';
+import { generateCategory } from '../filterByCategory/category';
+import { generateBrand } from '../filterByBrand/brand';
 import './filters.css';
 
 export const filters = document.createElement('div');
@@ -22,16 +22,10 @@ const copyLink = (e: MouseEvent) => {
 const buttonResetFilters = button('Reset filters', resetFilter);
 const buttonCopyLink = button('Copy Link', copyLink);
 
-// const addToCart = (e: MouseEvent) => {
-//     console.log('addToCart', e);
-// };
-
-// const buttonAddToCart = button('Add To Cart', addToCart);
-
 filters.append(resetTotal);
 resetTotal.append(buttonResetFilters);
 resetTotal.append(buttonCopyLink);
-filters.append(category);
-filters.append(brand);
+filters.append(generateCategory());
+filters.append(generateBrand());
 filters.append(price);
 filters.append(stock);

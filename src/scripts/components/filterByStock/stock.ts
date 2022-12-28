@@ -1,6 +1,6 @@
 import { filterBoxes } from './../filterBoxes/filterBoxes';
 import { multiRangeData, rangeData } from '../rangeData/rangeData';
-import * as products from '../../common/products.json';
+import { state } from '../../state/state';
 import './stock.css';
 
 const filterList = document.createElement('div');
@@ -8,23 +8,18 @@ filterList.className = 'filter-list';
 
 export const stock = filterBoxes('Stock', filterList);
 
-const stockArr = products.products.map((product) => product.stock);
-const minStock = Math.min.apply(null, stockArr);
-const maxStock = Math.max.apply(null, stockArr);
-let filtredMinStock;
-let filtredMaxStock;
 const minGap = 0;
 
 const fromData = document.createElement('div');
 fromData.className = 'from-data';
-fromData.innerHTML = `${minStock}`;
+fromData.innerHTML = `${state.filters.minStock}`;
 
 const spanArrow = document.createElement('span');
 spanArrow.innerHTML = ' ⟷ ';
 
 const toData = document.createElement('div');
 toData.className = 'to-data';
-toData.innerHTML = `${maxStock}`;
+toData.innerHTML = `${state.filters.maxStock}`;
 
 export const dataStockFilter = rangeData(fromData, spanArrow, toData);
 filterList.append(dataStockFilter);
@@ -37,14 +32,14 @@ startPoint.setAttribute('type', 'range');
 startPoint.setAttribute('min', '2');
 startPoint.setAttribute('max', '150');
 startPoint.addEventListener('input', slideOne);
-startPoint.setAttribute('value', `${minStock}`);
+startPoint.setAttribute('value', `${state.filters.minStock}`);
 
 endPoint.className = 'ng-untouched ng-pristine ng-valid';
 endPoint.setAttribute('type', 'range');
 endPoint.setAttribute('min', '2');
 endPoint.setAttribute('max', '150');
 endPoint.addEventListener('input', slideTwo);
-endPoint.setAttribute('value', `${maxStock}`);
+endPoint.setAttribute('value', `${state.filters.maxStock}`);
 
 export const dataRangeStockFilter = multiRangeData(startPoint, endPoint);
 filterList.append(dataRangeStockFilter);
@@ -55,8 +50,8 @@ function slideOne() {
         -minGap;
     }
 
-    filtredMinStock = startPoint.value.toString();
-    fromData.textContent = filtredMinStock;
+    const filteredMinStock = startPoint.value.toString();
+    fromData.textContent = `${filteredMinStock}`;
 }
 
 function slideTwo() {
@@ -64,6 +59,6 @@ function slideTwo() {
         endPoint.value = startPoint.value;
         +minGap;
     }
-    filtredMaxStock = endPoint.value.toString(); //Math.floor((+endPoint.value * maxStock) / 100).toString();
-    toData.textContent = filtredMaxStock;
+    const filtredMaxStock = endPoint.value.toString();
+    toData.textContent = `${filtredMaxStock}`;
 }

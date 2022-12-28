@@ -1,44 +1,51 @@
+import { state } from './../../state/state';
 import { filterBoxes } from './../filterBoxes/filterBoxes';
 import { checkbox } from '../checkbox/checkbox';
-import * as products from '../../common/products.json';
-
 import * as uniqCategory from '../../common/uniqCategory.json';
+import { filterProducts } from '../../state/actions';
+import { updateBrandFilters } from '../filterByBrand/brand';
 
-const filterList = document.createElement('div');
-filterList.className = 'filter-list';
-let checkedCategory: string[] = [];
+const generateCategoryFilters = () => {
+    const filterList = document.createElement('div');
+    filterList.className = 'filter-list';
 
-const handleChange = (e: Event) => {
-    console.log('checked', e);
-    if ((e.target as HTMLInputElement).checked === true) {
-        console.log('id event', (e.target as HTMLInputElement).id);
-        checkedCategory.push((e.target as HTMLInputElement).id);
-        console.log('checkedCategory', checkedCategory);
-    } else {
-        checkedCategory = checkedCategory.filter((item) => {
-            return item !== (e.target as HTMLInputElement).id;
-            console.log('uslovie', item, (e.target as HTMLInputElement).id, item !== (e.target as HTMLInputElement).id);
-        });
-        console.log('unchecked arr', checkedCategory);
-    }
+    const handleChange = (e: Event) => {
+        const span = (e.target as HTMLInputElement).parentElement?.parentElement?.lastChild?.firstChild;
+        if ((e.target as HTMLInputElement).checked === true) {
+            state.filters.category.push((e.target as HTMLInputElement).id);
+        } else {
+            state.filters.category = state.filters.category.filter((item) => {
+                return item !== (e.target as HTMLInputElement).id;
+            });
+        }
+        filterProducts();
+        if (span) {
+            span.textContent = `(${state.availableCategoryCount[(e.target as HTMLInputElement).id] || '0'}`;
+        }
+    };
+
+    const uniqCategoryArr = uniqCategory.uniqCategory;
+    uniqCategoryArr.forEach((item) => {
+        const checkboxCategories = checkbox(
+            item,
+            item,
+            `(${state.availableCategoryCount[item] || '0'}`,
+            '/',
+            `${state.availableCategoryCount[item] || '0'})`,
+            handleChange
+        );
+        filterList.append(checkboxCategories);
+    });
+
+    return filterList;
 };
 
-const categoryArr = products.products.map((product) => product.category);
-console.log('categoryArr', categoryArr);
-const repeatedCategoryCount = categoryArr.reduce((acc: { [key: string]: number }, el) => {
-    acc[el] = (acc[el] || 0) + 1;
-    return acc;
-}, {});
-console.log('repeatedCategoryCount', repeatedCategoryCount);
+export const generateCategory = () => {
+    return filterBoxes('Category', generateCategoryFilters());
+};
 
-// const makeUniqCategoryArr = (categoryArr: string[]) => [...new Set(categoryArr)];
-// const uniqCategoryArr = makeUniqCategoryArr(categoryArr);
-// console.log('uniqCategoryArr', uniqCategoryArr);
-
-const uniqCategoryArr = uniqCategory.uniqCategory;
-uniqCategoryArr.forEach((item) => {
-    const checkboxCategoryes = checkbox(item, item, `(5/${repeatedCategoryCount[item]})`, handleChange);
-    filterList.append(checkboxCategoryes);
-});
-
-export const category = filterBoxes('Category', filterList);
+export const updateCategoryFilters = () => {
+    const filterCategoryDiv = document.querySelector('.Category');
+    filterCategoryDiv?.childNodes[1].remove();
+    filterCategoryDiv?.append(generateCategoryFilters());
+};
