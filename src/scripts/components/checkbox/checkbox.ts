@@ -1,6 +1,6 @@
 import './checkbox.css';
 
-export const checkbox = (
+export const createCheckbox = (
     id: string,
     label: string,
     span1: string,

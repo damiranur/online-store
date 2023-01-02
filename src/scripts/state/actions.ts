@@ -29,6 +29,7 @@ export const filterProducts = () => {
             );
         });
     }
+    console.log('filteredProducts', filteredProducts);
     if (state.filters.category.length > 0 && state.filters.brand.length === 0) {
         state.filters.category.forEach((filter) => {
             filteredProducts = filteredProducts.concat(
@@ -38,6 +39,7 @@ export const filterProducts = () => {
             );
         });
     }
+    console.log('filteredProductsCategory', filteredProducts);
 
     if (state.filters.category.length === 0 && state.filters.brand.length > 0) {
         state.filters.brand.forEach((filter) => {
@@ -48,16 +50,24 @@ export const filterProducts = () => {
             );
         });
     }
+
+    if (state.filters.category.length === 0 && state.filters.brand.length === 0) {
+        filteredProducts = state.products;
+    }
+    console.log('filteredProductsBrand', filteredProducts);
     filteredProducts = filteredProducts.filter((item) => {
+        console.log('state.filters.maxPrice', state.filters.maxPrice);
         return item.price <= state.filters.maxPrice && item.price >= state.filters.minPrice;
     });
+    console.log('filteredProductsPrice', filteredProducts);
 
     filteredProducts = filteredProducts.filter((item) => {
         return item.stock <= state.filters.maxStock && item.stock >= state.filters.minStock;
     });
+    console.log('filteredProductsStock', filteredProducts);
 
     state.filteredProducts = filteredProducts;
-    console.log('filteredProducts', filteredProducts);
+    console.log('filteredProductsAll', filteredProducts);
 
     const availableCategoryCount = state.filteredProducts
         .map((product) => product.category)
@@ -97,6 +107,13 @@ const updateCategoryFilter = () => {
         } else {
             (checkboxWrapper.lastChild?.firstChild as HTMLElement).innerHTML = `(0`;
         }
+        if ((checkboxWrapper.lastChild?.firstChild as HTMLElement).innerHTML === '(0') {
+            (checkboxWrapper as HTMLElement).classList.remove('item-active');
+            (checkboxWrapper as HTMLElement).classList.add('item-not-active');
+        } else {
+            (checkboxWrapper as HTMLElement).classList.remove('item-not-active');
+            (checkboxWrapper as HTMLElement).classList.add('item-active');
+        }
     });
 };
 
@@ -110,6 +127,13 @@ const updateBrandFilter = () => {
             }`;
         } else {
             (checkboxWrapper.lastChild?.firstChild as HTMLElement).innerHTML = `(0`;
+        }
+        if ((checkboxWrapper.lastChild?.firstChild as HTMLElement).innerHTML === '(0') {
+            (checkboxWrapper as HTMLElement).classList.remove('item-active');
+            (checkboxWrapper as HTMLElement).classList.add('item-not-active');
+        } else {
+            (checkboxWrapper as HTMLElement).classList.remove('item-not-active');
+            (checkboxWrapper as HTMLElement).classList.add('item-active');
         }
     });
 };
