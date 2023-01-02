@@ -1,0 +1,182 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: calc(0.2rem + 1vw);
+    color: orange;
+    font-family: Philosopher, sans-serif;
+    word-wrap: break-word;
+}
+.products {
+    background: rgba(24, 26, 28, 0.5);
+    border: 1px solid orange;
+    border-radius: 0.7rem;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    flex-grow: 1;
+}
+.item {
+    width: 23%;
+    padding-top: 20%;
+    position: relative;
+    margin: 1%;
+    border: 1px solid orange;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.item-wrapper {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    background-size: cover;
+}
+.item-text {
+    width: 100%;
+    height: 83%;
+    cursor: pointer;
+}
+.item-title {
+    background: rgba(24, 26, 28, 0.8);
+    padding: 1%;
+    font-size: 90%;
+    text-align: center;
+    border-bottom: 1px solid orange;
+    white-space: nowrap;
+}
+.item-info {
+    color: wheat;
+}
+.item-info-item {
+    width: 55%;
+    background-color: #4d2f14f2;
+    border-radius: 0 0 0.4rem;
+    border-bottom: 1px solid orange;
+    border-right: 1px solid orange;
+    padding: 1%;
+}
+.item-info-item p {
+    font-size: 0.6rem;
+    color: wheat;
+}
+.item-info-item span {
+    font-size: 0.6rem;
+    color: #bb954e;
+}
+.item-buttons {
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: space-evenly;
+}
+.item-buttons button {
+    background-color: #181a1c;
+    border: 1px solid orange;
+    border-radius: 0.3rem;
+    padding-left: 2%;
+    padding-right: 2%;
+    font-size: 80%;
+    cursor: pointer;
+}
+
+
+
+.sort-products, .view-mode{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.sort-products{
+    background: rgba(24,26,28,.5);
+    padding: .5%;
+    border-bottom: 1px solid orange;
+}
+select {
+    outline: 0;
+    border: 0;
+    flex: 1;
+    padding: 0 1em;
+    color: #fff;
+    background-color: #181a1c;
+    cursor: pointer;
+    border-radius: 1rem;
+    color: orange;
+    border: 1px solid orange;
+    text-align: center;
+}
+
+.stat {
+    color: wheat;
+}
+
+.search-bar   input {
+    background-color: #181a1c;
+    width: 140%;
+    border: 1px solid orange;
+    color: orange;
+    border-radius: 2rem;
+    padding: .2rem;
+    outline: none;
+    font-size: 80%;
+    text-align: center;
+}
+
+.sort-products, .view-mode {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.small-v, .big-v {
+    border: 1px solid orange;
+    height: 2rem;
+    width: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: .3rem;
+    justify-content: center;
+    align-items: center;
+    padding: 2%;
+    cursor: pointer;
+    margin-left: .5rem;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.small-v   div {
+    white-space: nowrap;
+    width: 12%;
+    height: 12%;
+    margin: 2%;
+    font-size: 50%;
+    border-radius: 100%;
+    overflow: hidden;
+    background: orange;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.big-v   div {
+    white-space: nowrap;
+    width: 20%;
+    height: 20%;
+    margin: 2%;
+    font-size: 50%;
+    border-radius: 100%;
+    overflow: hidden;
+    background: orange;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+
+.display{
+    width: 74%;
+    background: rgba(24,26,28,.5);
+    border: 1px solid orange;
+    border-radius: .7rem;
+    overflow: hidden;
+}
