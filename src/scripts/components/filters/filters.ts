@@ -3,6 +3,8 @@ import { price } from './../filterByPrice/price';
 import { button } from './../button/button';
 import { generateCategory } from '../filterByCategory/category';
 import { generateBrand } from '../filterByBrand/brand';
+import { clearFilteredProducts } from '../../state/actions';
+
 import './filters.css';
 
 export const filters = document.createElement('div');
@@ -12,7 +14,7 @@ const resetTotal = document.createElement('div');
 resetTotal.className = 'reset-total';
 
 const resetFilter = (e: MouseEvent) => {
-    console.log('resetFilter', e);
+    clearFilteredProducts();
 };
 
 const copyLink = (e: MouseEvent) => {
