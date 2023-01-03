@@ -1,6 +1,7 @@
 import { state } from './state';
 import { Product } from './types';
 import * as products from '../common/products.json';
+import { updateProductsList } from '../components/products/products';
 
 const categoryArr = products.products.map((product) => product.category);
 export const initialCategoryCount = categoryArr.reduce((acc: { [key: string]: number }, el) => {
@@ -13,6 +14,16 @@ export const initialBrandCount = brandArr.reduce((acc: { [key: string]: number }
     acc[el] = (acc[el] || 0) + 1;
     return acc;
 }, {});
+
+const updateUI = () => {
+    console.log('updateFilters');
+    updateCategoryFilter();
+    updateBrandFilter();
+    updatePriceFilter();
+    updateStockFilter();
+    updateProductsList();
+    updateStat();
+};
 
 export const filterProducts = () => {
     let filteredProducts: Product[] = [];
@@ -87,14 +98,6 @@ export const filterProducts = () => {
     state.availableBrandCount = availableBrandCount;
     updateUI();
 };
-
-function updateUI() {
-    console.log('updateFilters');
-    updateCategoryFilter();
-    updateBrandFilter();
-    updatePriceFilter();
-    updateStockFilter();
-}
 
 const updateCategoryFilter = () => {
     const filterBox = document.querySelector('.Category');
@@ -180,4 +183,10 @@ const updateStockFilter = () => {
         (stockBox?.lastChild?.firstChild?.lastChild as HTMLDivElement).innerHTML = `${state.filters.maxStock}`;
         (stockBox?.lastChild?.lastChild?.lastChild as HTMLInputElement).value = `${state.filters.maxStock}`;
     }
+};
+
+const updateStat = () => {
+    const stat = document.querySelector('.stat') as HTMLElement;
+    stat.textContent = '';
+    stat.textContent = `Found: ${state.filteredProducts.length}`;
 };
