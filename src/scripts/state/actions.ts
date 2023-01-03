@@ -3,7 +3,7 @@ import { Product } from './types';
 import * as products from '../common/products.json';
 import { updateProductsList } from '../components/products/products';
 
-const categoryArr = products.products.map((product) => product.category);
+const categoryArr: string[] = products.products.map((product) => product.category);
 export const initialCategoryCount = categoryArr.reduce((acc: { [key: string]: number }, el) => {
     acc[el] = (acc[el] || 0) + 1;
     return acc;
@@ -182,4 +182,13 @@ const updateStat = () => {
     const stat = document.querySelector('.stat') as HTMLElement;
     stat.textContent = '';
     stat.textContent = `Found: ${state.filteredProducts.length}`;
+};
+
+export const clearFilteredProducts = () => {
+    state.filteredProducts = products.products;
+    state.availableCategoryCount = initialCategoryCount;
+    state.availableBrandCount = initialBrandCount;
+    const allCheckBoxes = document.querySelectorAll('input[type="checkbox"]');
+    allCheckBoxes.forEach((checkbox) => ((checkbox as HTMLInputElement).checked = false));
+    updateUI();
 };
