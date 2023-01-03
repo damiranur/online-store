@@ -1,6 +1,5 @@
-import { updateCategoryFilters } from './../filterByCategory/category';
 import { filterBoxes } from './../filterBoxes/filterBoxes';
-import { checkbox } from '../checkbox/checkbox';
+import { createCheckbox } from '../checkbox/checkbox';
 import { state } from '../../state/state';
 import * as uniqBrand from '../../common/uniqBrand.json';
 import { filterProducts } from '../../state/actions';
@@ -26,7 +25,7 @@ const generateBrandFilters = () => {
 
     const uniqBrandArr = uniqBrand.uniqBrand;
     uniqBrandArr.forEach((item) => {
-        const checkboxBrands = checkbox(
+        const checkboxBrands = createCheckbox(
             item,
             item,
             `(${state.availableBrandCount[item] || '0'}`,

@@ -1,6 +1,7 @@
 import { state } from './state';
 import { Product } from './types';
 import * as products from '../common/products.json';
+import { updateProductsList } from '../components/products/products';
 
 const categoryArr = products.products.map((product) => product.category);
 export const initialCategoryCount = categoryArr.reduce((acc: { [key: string]: number }, el) => {
@@ -13,6 +14,15 @@ export const initialBrandCount = brandArr.reduce((acc: { [key: string]: number }
     acc[el] = (acc[el] || 0) + 1;
     return acc;
 }, {});
+
+const updateUI = () => {
+    updateCategoryFilter();
+    updateBrandFilter();
+    updatePriceFilter();
+    updateStockFilter();
+    updateProductsList();
+    updateStat();
+};
 
 export const filterProducts = () => {
     let filteredProducts: Product[] = [];
@@ -48,6 +58,11 @@ export const filterProducts = () => {
             );
         });
     }
+
+    if (state.filters.category.length === 0 && state.filters.brand.length === 0) {
+        filteredProducts = state.products;
+    }
+
     filteredProducts = filteredProducts.filter((item) => {
         return item.price <= state.filters.maxPrice && item.price >= state.filters.minPrice;
     });
@@ -57,7 +72,6 @@ export const filterProducts = () => {
     });
 
     state.filteredProducts = filteredProducts;
-    console.log('filteredProducts', filteredProducts);
 
     const availableCategoryCount = state.filteredProducts
         .map((product) => product.category)
@@ -78,14 +92,6 @@ export const filterProducts = () => {
     updateUI();
 };
 
-function updateUI() {
-    console.log('updateFilters');
-    updateCategoryFilter();
-    updateBrandFilter();
-    updatePriceFilter();
-    updateStockFilter();
-}
-
 const updateCategoryFilter = () => {
     const filterBox = document.querySelector('.Category');
     filterBox?.lastChild?.childNodes.forEach((checkboxWrapper) => {
@@ -96,6 +102,13 @@ const updateCategoryFilter = () => {
             }`;
         } else {
             (checkboxWrapper.lastChild?.firstChild as HTMLElement).innerHTML = `(0`;
+        }
+        if ((checkboxWrapper.lastChild?.firstChild as HTMLElement).innerHTML === '(0') {
+            (checkboxWrapper as HTMLElement).classList.remove('item-active');
+            (checkboxWrapper as HTMLElement).classList.add('item-not-active');
+        } else {
+            (checkboxWrapper as HTMLElement).classList.remove('item-not-active');
+            (checkboxWrapper as HTMLElement).classList.add('item-active');
         }
     });
 };
@@ -110,6 +123,13 @@ const updateBrandFilter = () => {
             }`;
         } else {
             (checkboxWrapper.lastChild?.firstChild as HTMLElement).innerHTML = `(0`;
+        }
+        if ((checkboxWrapper.lastChild?.firstChild as HTMLElement).innerHTML === '(0') {
+            (checkboxWrapper as HTMLElement).classList.remove('item-active');
+            (checkboxWrapper as HTMLElement).classList.add('item-not-active');
+        } else {
+            (checkboxWrapper as HTMLElement).classList.remove('item-not-active');
+            (checkboxWrapper as HTMLElement).classList.add('item-active');
         }
     });
 };
@@ -156,4 +176,10 @@ const updateStockFilter = () => {
         (stockBox?.lastChild?.firstChild?.lastChild as HTMLDivElement).innerHTML = `${state.filters.maxStock}`;
         (stockBox?.lastChild?.lastChild?.lastChild as HTMLInputElement).value = `${state.filters.maxStock}`;
     }
+};
+
+const updateStat = () => {
+    const stat = document.querySelector('.stat') as HTMLElement;
+    stat.textContent = '';
+    stat.textContent = `Found: ${state.filteredProducts.length}`;
 };

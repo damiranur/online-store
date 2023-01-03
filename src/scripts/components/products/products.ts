@@ -1,7 +1,8 @@
+import { state } from '../../state/state';
 import Data from '../../common/products.json';
 import './products.css';
 const holder = document.createElement('div');
-const products = Data.products;
+const products = state?.filteredProducts || Data.products;
 const display = document.createElement('div');
 let productsSorted = products;
 function constructorProduct(el: {
@@ -53,8 +54,9 @@ function constructorProduct(el: {
     return elem;
 }
 holder.className = 'products';
-function updateProductsList(): void {
+export function updateProductsList(): void {
     holder.innerHTML = '';
+    productsSorted = state?.filteredProducts || productsSorted;
     for (let i = 0; i < productsSorted.length; i++) {
         holder.append(constructorProduct(productsSorted[i]));
     }
@@ -101,27 +103,27 @@ export default display;
 
 select.addEventListener('change', function () {
     if (select.value === 'price-ASC')
-        productsSorted = products.sort(function (a, b): number {
+        productsSorted = (state?.filteredProducts || productsSorted).sort(function (a, b): number {
             return a.price - b.price;
         });
     if (select.value === 'price-DESC')
-        productsSorted = products.sort(function (a, b): number {
+        productsSorted = (state?.filteredProducts || productsSorted).sort(function (a, b): number {
             return b.price - a.price;
         });
     if (select.value === 'rating-ASC')
-        productsSorted = products.sort(function (a, b): number {
+        productsSorted = (state?.filteredProducts || productsSorted).sort(function (a, b): number {
             return a.rating - b.rating;
         });
     if (select.value === 'rating-DESC')
-        productsSorted = products.sort(function (a, b): number {
+        productsSorted = (state?.filteredProducts || productsSorted).sort(function (a, b): number {
             return b.rating - a.rating;
         });
     if (select.value === 'discount-ASC')
-        productsSorted = products.sort(function (a, b): number {
+        productsSorted = (state?.filteredProducts || productsSorted).sort(function (a, b): number {
             return a.discountPercentage - b.discountPercentage;
         });
     if (select.value === 'discount-DESC')
-        productsSorted = products.sort(function (a, b): number {
+        productsSorted = (state?.filteredProducts || productsSorted).sort(function (a, b): number {
             return b.discountPercentage - a.discountPercentage;
         });
 
@@ -129,7 +131,9 @@ select.addEventListener('change', function () {
 });
 
 searchInput.addEventListener('change', function () {
-    productsSorted = products.filter((it) => it.title.indexOf(searchInput.value) + 1);
+    productsSorted = (state?.filteredProducts || productsSorted).filter(
+        (it) => it.title.indexOf(searchInput.value) + 1
+    );
     stat.textContent = `Found: ${productsSorted.length}`;
     updateProductsList();
 });

@@ -1,9 +1,8 @@
 import { state } from './../../state/state';
 import { filterBoxes } from './../filterBoxes/filterBoxes';
-import { checkbox } from '../checkbox/checkbox';
+import { createCheckbox } from '../checkbox/checkbox';
 import * as uniqCategory from '../../common/uniqCategory.json';
 import { filterProducts } from '../../state/actions';
-import { updateBrandFilters } from '../filterByBrand/brand';
 
 const generateCategoryFilters = () => {
     const filterList = document.createElement('div');
@@ -26,7 +25,7 @@ const generateCategoryFilters = () => {
 
     const uniqCategoryArr = uniqCategory.uniqCategory;
     uniqCategoryArr.forEach((item) => {
-        const checkboxCategories = checkbox(
+        const checkboxCategories = createCheckbox(
             item,
             item,
             `(${state.availableCategoryCount[item] || '0'}`,

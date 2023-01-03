@@ -2,6 +2,7 @@ import { filterBoxes } from './../filterBoxes/filterBoxes';
 import { multiRangeData, rangeData } from '../rangeData/rangeData';
 import { state } from './../../state/state';
 import './price.css';
+import { filterProducts } from '../../state/actions';
 
 const filterList = document.createElement('div');
 filterList.className = 'filter-list';
@@ -52,6 +53,8 @@ function slideOne() {
 
     const filteredMinPrice = startPoint.value.toString();
     fromData.textContent = `€${filteredMinPrice}`;
+    state.filters.minPrice = +filteredMinPrice;
+    filterProducts();
 }
 
 function slideTwo() {
@@ -59,6 +62,8 @@ function slideTwo() {
         endPoint.value = startPoint.value;
         +minGap;
     }
-    const filtredMaxPrice = endPoint.value.toString();
-    toData.textContent = `€${filtredMaxPrice}`;
+    const filteredMaxPrice = endPoint.value.toString();
+    toData.textContent = `€${filteredMaxPrice}`;
+    state.filters.maxPrice = +filteredMaxPrice;
+    filterProducts();
 }
