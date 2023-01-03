@@ -55,7 +55,6 @@ function constructorProduct(el: {
 }
 holder.className = 'products';
 export function updateProductsList(): void {
-    console.log('updateProductsList');
     holder.innerHTML = '';
     productsSorted = state?.filteredProducts || productsSorted;
     for (let i = 0; i < productsSorted.length; i++) {
