@@ -5,6 +5,7 @@ import { IState } from './types';
 export const state: IState = {
     products: products.products,
     filteredProducts: products.products,
+    searchedProducts: products.products,
     filters: {
         brand: [],
         category: [],
@@ -12,6 +13,7 @@ export const state: IState = {
         minPrice: 10,
         minStock: 2,
         maxStock: 150,
+        search: '',
     },
     availableCategoryCount: initialCategoryCount,
     availableBrandCount: initialBrandCount,

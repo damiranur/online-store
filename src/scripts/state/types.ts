@@ -15,6 +15,7 @@ export interface Product {
 export interface IState {
     products: Product[];
     filteredProducts: Product[];
+    searchedProducts: Product[];
     filters: {
         brand: string[];
         category: string[];
@@ -22,7 +23,14 @@ export interface IState {
         minPrice: number;
         minStock: number;
         maxStock: number;
+        search: string;
     };
     availableCategoryCount: { [key: string]: number };
     availableBrandCount: { [key: string]: number };
+}
+
+export interface cart {
+    products: Array<[Product, number]>;
+    totalPrice: number;
+    totalAmount: number;
 }

@@ -15,7 +15,7 @@ export const initialBrandCount = brandArr.reduce((acc: { [key: string]: number }
     return acc;
 }, {});
 
-const updateUI = () => {
+export const updateUI = () => {
     updateCategoryFilter();
     updateBrandFilter();
     updatePriceFilter();
@@ -72,8 +72,9 @@ export const filterProducts = () => {
     });
 
     state.filteredProducts = filteredProducts;
+    state.searchedProducts = filteredProducts.filter((it) => it.title.indexOf(state.filters.search) + 1);
 
-    const availableCategoryCount = state.filteredProducts
+    const availableCategoryCount = state.searchedProducts
         .map((product) => product.category)
         .reduce((acc: { [key: string]: number }, el) => {
             acc[el] = (acc[el] || 0) + 1;
@@ -82,7 +83,7 @@ export const filterProducts = () => {
 
     state.availableCategoryCount = availableCategoryCount;
 
-    const availableBrandCount = state.filteredProducts
+    const availableBrandCount = state.searchedProducts
         .map((product) => product.brand)
         .reduce((acc: { [key: string]: number }, el) => {
             acc[el] = (acc[el] || 0) + 1;
@@ -135,7 +136,7 @@ const updateBrandFilter = () => {
 };
 
 const updatePriceFilter = () => {
-    const priceArr = state.filteredProducts.map((product) => product.price);
+    const priceArr = state.searchedProducts.map((product) => product.price);
     const minPrice = Math.min.apply(null, priceArr);
     const priceBox = document.querySelector('.Price');
     (document.querySelector('.from-data') as HTMLDivElement).innerHTML = `€${minPrice}.00`;
@@ -157,7 +158,7 @@ const updatePriceFilter = () => {
 };
 
 const updateStockFilter = () => {
-    const stockArr = state.filteredProducts.map((product) => product.stock);
+    const stockArr = state.searchedProducts.map((product) => product.stock);
     const minStock = Math.min.apply(null, stockArr);
     const stockBox = document.querySelector('.Stock');
     (stockBox?.lastChild?.firstChild?.firstChild as HTMLDivElement).innerHTML = `${minStock}`;
@@ -181,7 +182,7 @@ const updateStockFilter = () => {
 const updateStat = () => {
     const stat = document.querySelector('.stat') as HTMLElement;
     stat.textContent = '';
-    stat.textContent = `Found: ${state.filteredProducts.length}`;
+    stat.textContent = `Found: ${state.searchedProducts.length}`;
 };
 
 export const clearFilteredProducts = () => {

@@ -1,4 +1,5 @@
 import './header.css';
+import { state as cartState } from '../../state/cartState';
 
 export const header = document.createElement('header');
 header.className = 'header';
@@ -21,14 +22,14 @@ totalPrice.className = 'total-price';
 totalPrice.innerHTML = `Cart total:`;
 
 const totalPriceCard = document.createElement('span');
-totalPriceCard.innerText = ` €0.00`;
+totalPriceCard.innerText = ` €${cartState.totalPrice}`;
 
 const cart = document.createElement('div');
 cart.className = 'cart';
 
 const cartText = document.createElement('div');
 cartText.className = 'cart__text';
-cartText.innerHTML = `<div>0</div>`;
+cartText.innerHTML = `<div>${cartState.totalAmount}</div>`;
 
 const advert = document.createElement('div');
 advert.className = 'advert';
