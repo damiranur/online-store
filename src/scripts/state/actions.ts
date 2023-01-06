@@ -214,7 +214,6 @@ function setSortBy() {
     const select = document.querySelector('.sort-name');
 
     (select as HTMLSelectElement).value = state.filters.sortValue;
-    console.log('(select as HTMLSelectElement).value', (select as HTMLSelectElement).value);
     options?.forEach((option) => {
         if ((option as HTMLOptionElement).value === state.filters.sortValue) {
             (option as HTMLOptionElement).selected = true;

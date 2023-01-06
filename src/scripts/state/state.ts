@@ -3,7 +3,6 @@ import { initialCategoryCount, initialBrandCount } from './actions';
 import { IState } from './types';
 import { updateUI } from './actions';
 const localStorageState = JSON.parse(localStorage.getItem('state') || '');
-console.log(localStorageState, JSON.parse(localStorage.getItem('state') || ''));
 
 const InitialState: IState = {
     products: products.products,
