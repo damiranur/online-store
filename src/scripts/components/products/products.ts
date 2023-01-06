@@ -1,4 +1,5 @@
-import { state } from '../../state/state';
+import { state } from './../../state/state';
+import { filters } from './../filters/filters';
 import Data from '../../common/products.json';
 import './products.css';
 const holder = document.createElement('div');
@@ -128,6 +129,7 @@ select.addEventListener('change', function () {
         });
 
     updateProductsList();
+    state.filters.sortValue = select.value;
 });
 
 searchInput.addEventListener('change', function () {

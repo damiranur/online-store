@@ -9,20 +9,23 @@ const generateCategoryFilters = () => {
     filterList.className = 'filter-list';
 
     const handleChange = (e: Event) => {
-        const span = (e.target as HTMLInputElement).parentElement?.parentElement?.lastChild?.firstChild;
+        const spanLeft = (e.target as HTMLInputElement).parentElement?.parentElement?.lastChild?.firstChild;
         if ((e.target as HTMLInputElement).checked === true) {
             state.filters.category.push((e.target as HTMLInputElement).id);
+            state.filters.checkedInputs[(e.target as HTMLInputElement).id] = (e.target as HTMLInputElement).checked;
+            console.log('state.filters.checkedInputs', state.filters.checkedInputs);
         } else {
             state.filters.category = state.filters.category.filter((item) => {
                 return item !== (e.target as HTMLInputElement).id;
             });
+            state.filters.checkedInputs[(e.target as HTMLInputElement).id] = false;
         }
         filterProducts();
-        if (span) {
-            span.textContent = `(${state.availableCategoryCount[(e.target as HTMLInputElement).id] || '0'}`;
+        if (spanLeft) {
+            spanLeft.textContent = `(${state.availableCategoryCount[(e.target as HTMLInputElement).id] || '0'}`;
         }
     };
-
+    console.log('state.availableCategoryCount', state.availableCategoryCount);
     const uniqCategoryArr = uniqCategory.uniqCategory;
     uniqCategoryArr.forEach((item) => {
         const checkboxCategories = createCheckbox(
