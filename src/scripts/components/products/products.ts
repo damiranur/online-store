@@ -1,23 +1,14 @@
-import { state } from './../../state/state';
-import { filters } from './../filters/filters';
+import { state } from '../../state/state';
+import { state as cart, updateCart } from '../../state/cartState';
 import Data from '../../common/products.json';
 import './products.css';
+import { Product } from '../../state/types';
+import { filterProducts } from '../../state/actions';
 const holder = document.createElement('div');
 const products = state?.filteredProducts || Data.products;
 const display = document.createElement('div');
 let productsSorted = products;
-function constructorProduct(el: {
-    id: number;
-    title: string;
-    description: string;
-    price: number;
-    discountPercentage: number;
-    rating: number;
-    stock: number;
-    brand: string;
-    category: string;
-    thumbnail: string;
-}): HTMLDivElement {
+function constructorProduct(el: Product): HTMLDivElement {
     const elem = document.createElement('div');
     const wrapper = document.createElement('div');
     wrapper.className = 'item-wrapper';
@@ -47,17 +38,25 @@ function constructorProduct(el: {
     wrapper.append(itemButtons);
     const addtocartBtn = document.createElement('button');
     addtocartBtn.textContent = 'ADD TO CART';
+    addtocartBtn.addEventListener('click', function () {
+        cart.products.push([el, 1]);
+        cart.totalAmount += 1;
+        cart.totalPrice += el.price;
+        updateCart(cart.totalAmount, cart.totalPrice);
+    });
     const detailsBtn = document.createElement('button');
     detailsBtn.textContent = 'DETAILS';
     detailsBtn.tabIndex = 0;
     itemButtons.append(addtocartBtn, detailsBtn);
     elem.classList.add('item');
+    elem.dataset.id = String(el.id);
     return elem;
 }
 holder.className = 'products';
+
 export function updateProductsList(): void {
     holder.innerHTML = '';
-    productsSorted = state?.filteredProducts || productsSorted;
+    productsSorted = state?.searchedProducts || state?.filteredProducts || productsSorted;
     for (let i = 0; i < productsSorted.length; i++) {
         holder.append(constructorProduct(productsSorted[i]));
     }
@@ -133,9 +132,6 @@ select.addEventListener('change', function () {
 });
 
 searchInput.addEventListener('change', function () {
-    productsSorted = (state?.filteredProducts || productsSorted).filter(
-        (it) => it.title.indexOf(searchInput.value) + 1
-    );
-    stat.textContent = `Found: ${productsSorted.length}`;
-    updateProductsList();
+    state.filters.search = searchInput.value;
+    filterProducts();
 });

@@ -7,6 +7,7 @@ const localStorageState = JSON.parse(localStorage.getItem('state') || '');
 const InitialState: IState = {
     products: products.products,
     filteredProducts: products.products,
+    searchedProducts: products.products,
 
     filters: {
         brand: [],
@@ -16,6 +17,7 @@ const InitialState: IState = {
         minPrice: 10,
         minStock: 2,
         maxStock: 150,
+        search: '',
         sortValue: 'sort-title',
     },
     availableCategoryCount: initialCategoryCount,
