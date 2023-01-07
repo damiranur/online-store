@@ -197,8 +197,11 @@ export const clearFilteredProducts = () => {
     state.filteredProducts = products.products;
     state.availableCategoryCount = initialCategoryCount;
     state.availableBrandCount = initialBrandCount;
+    state.filters.sortValue = 'sort-title';
+    state.filters.search = '';
     const allCheckBoxes = document.querySelectorAll('input[type="checkbox"]');
     allCheckBoxes.forEach((checkbox) => ((checkbox as HTMLInputElement).checked = false));
+
     updateUI();
 };
 

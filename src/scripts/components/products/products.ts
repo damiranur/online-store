@@ -93,7 +93,7 @@ const smallV = document.createElement('div');
 smallV.className = 'small-v';
 smallV.innerHTML = '<div >.</div>'.repeat(36);
 const bigV = document.createElement('div');
-bigV.className = 'big-v';
+bigV.className = 'big-v active-mode';
 bigV.innerHTML = '<div >.</div>'.repeat(16);
 viewMode.append(smallV, bigV);
 SortProducts.append(SortBar, stat, searchBar, viewMode);
@@ -133,4 +133,32 @@ select.addEventListener('change', function () {
 searchInput.addEventListener('change', function () {
     state.filters.search = searchInput.value;
     filterProducts();
+});
+
+smallV.addEventListener('click', function () {
+    console.log('click');
+    const elem = document.querySelectorAll('.item');
+    elem.forEach((element) => {
+        element.classList.add('small-item');
+    });
+    const itemInfo = document.querySelectorAll('.item-info-item');
+    itemInfo.forEach((elInfo) => {
+        elInfo.classList.add('hidden');
+    });
+    bigV.classList.remove('active-mode');
+    smallV.classList.add('active-mode');
+});
+
+bigV.addEventListener('click', function () {
+    console.log('click');
+    const elem = document.querySelectorAll('.item');
+    elem.forEach((element) => {
+        element.classList.remove('small-item');
+    });
+    const itemInfo = document.querySelectorAll('.item-info-item');
+    itemInfo.forEach((elInfo) => {
+        elInfo.classList.remove('hidden');
+    });
+    bigV.classList.add('active-mode');
+    smallV.classList.remove('active-mode');
 });

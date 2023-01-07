@@ -27,6 +27,17 @@
     display: flex;
     flex-direction: column;
 }
+.small-item {
+    width: 14.6%;
+    padding-top: 12%;
+    position: relative;
+    margin: 1%;
+    border: 1px solid orange;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
 
 .item-wrapper {
     width: 100%;
@@ -67,6 +78,9 @@
     font-size: 0.6rem;
     color: #bb954e;
 }
+.hidden {
+    display: none;
+}
 .item-buttons {
     width: 100%;
     height: 15%;
@@ -83,16 +97,15 @@
     cursor: pointer;
 }
 
-
-
-.sort-products, .view-mode{
+.sort-products,
+.view-mode {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.sort-products{
-    background: rgba(24,26,28,.5);
-    padding: .5%;
+.sort-products {
+    background: rgba(24, 26, 28, 0.5);
+    padding: 0.5%;
     border-bottom: 1px solid orange;
 }
 select {
@@ -113,40 +126,42 @@ select {
     color: wheat;
 }
 
-.search-bar   input {
+.search-bar input {
     background-color: #181a1c;
     width: 140%;
     border: 1px solid orange;
     color: orange;
     border-radius: 2rem;
-    padding: .2rem;
+    padding: 0.2rem;
     outline: none;
     font-size: 80%;
     text-align: center;
 }
 
-.sort-products, .view-mode {
+.sort-products,
+.view-mode {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.small-v, .big-v {
+.small-v,
+.big-v {
     border: 1px solid orange;
     height: 2rem;
     width: 2rem;
     display: flex;
     flex-wrap: wrap;
-    border-radius: .3rem;
+    border-radius: 0.3rem;
     justify-content: center;
     align-items: center;
     padding: 2%;
     cursor: pointer;
-    margin-left: .5rem;
+    margin-left: 0.5rem;
     -webkit-user-select: none;
     user-select: none;
 }
 
-.small-v   div {
+.small-v div {
     white-space: nowrap;
     width: 12%;
     height: 12%;
@@ -159,7 +174,7 @@ select {
     user-select: none;
 }
 
-.big-v   div {
+.big-v div {
     white-space: nowrap;
     width: 20%;
     height: 20%;
@@ -172,11 +187,15 @@ select {
     user-select: none;
 }
 
+.active-mode {
+    box-shadow: 0 0 3px 1px #c45f07;
+    border: 1px solid rgb(235, 68, 68);
+}
 
-.display{
+.display {
     width: 74%;
-    background: rgba(24,26,28,.5);
+    background: rgba(24, 26, 28, 0.5);
     border: 1px solid orange;
-    border-radius: .7rem;
+    border-radius: 0.7rem;
     overflow: hidden;
 }
