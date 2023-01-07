@@ -74,9 +74,9 @@ export const filterProducts = () => {
     });
 
     state.filteredProducts = filteredProducts;
-    state.searchedProducts = filteredProducts.filter((it) => it.title.indexOf(state.filters.search) + 1);
+    state.filteredProducts = filteredProducts.filter((it) => it.title.indexOf(state.filters.search) + 1);
 
-    const availableCategoryCount = state.searchedProducts
+    const availableCategoryCount = state.filteredProducts
         .map((product) => product.category)
         .reduce((acc: { [key: string]: number }, el) => {
             acc[el] = (acc[el] || 0) + 1;
@@ -85,7 +85,7 @@ export const filterProducts = () => {
 
     state.availableCategoryCount = availableCategoryCount;
 
-    const availableBrandCount = state.searchedProducts
+    const availableBrandCount = state.filteredProducts
         .map((product) => product.brand)
         .reduce((acc: { [key: string]: number }, el) => {
             acc[el] = (acc[el] || 0) + 1;
@@ -144,7 +144,7 @@ const updateBrandFilter = () => {
 };
 
 const updatePriceFilter = () => {
-    const priceArr = state.searchedProducts.map((product) => product.price);
+    const priceArr = state.filteredProducts.map((product) => product.price);
     const minPrice = Math.min.apply(null, priceArr);
     const priceBox = document.querySelector('.Price');
     (document.querySelector('.from-data') as HTMLDivElement).innerHTML = `€${minPrice}.00`;
@@ -166,7 +166,7 @@ const updatePriceFilter = () => {
 };
 
 const updateStockFilter = () => {
-    const stockArr = state.searchedProducts.map((product) => product.stock);
+    const stockArr = state.filteredProducts.map((product) => product.stock);
     const minStock = Math.min.apply(null, stockArr);
     const stockBox = document.querySelector('.Stock');
     (stockBox?.lastChild?.firstChild?.firstChild as HTMLDivElement).innerHTML = `${minStock}`;
@@ -190,7 +190,7 @@ const updateStockFilter = () => {
 const updateStat = () => {
     const stat = document.querySelector('.stat') as HTMLElement;
     stat.textContent = '';
-    stat.textContent = `Found: ${state.searchedProducts.length}`;
+    stat.textContent = `Found: ${state.filteredProducts.length}`;
 };
 
 export const clearFilteredProducts = () => {

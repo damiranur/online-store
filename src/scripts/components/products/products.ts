@@ -56,7 +56,7 @@ holder.className = 'products';
 
 export function updateProductsList(): void {
     holder.innerHTML = '';
-    productsSorted = state?.searchedProducts || state?.filteredProducts || productsSorted;
+    productsSorted = state?.filteredProducts || productsSorted;
     for (let i = 0; i < productsSorted.length; i++) {
         holder.append(constructorProduct(productsSorted[i]));
     }
@@ -126,7 +126,6 @@ select.addEventListener('change', function () {
         productsSorted = (state?.filteredProducts || productsSorted).sort(function (a, b): number {
             return b.discountPercentage - a.discountPercentage;
         });
-
     updateProductsList();
     state.filters.sortValue = select.value;
 });
