@@ -12,10 +12,12 @@ const generateBrandFilters = () => {
         const span = (e.target as HTMLInputElement).parentElement?.parentElement?.lastChild?.firstChild;
         if ((e.target as HTMLInputElement).checked === true) {
             state.filters.brand.push((e.target as HTMLInputElement).id);
+            state.filters.checkedInputs[(e.target as HTMLInputElement).id] = (e.target as HTMLInputElement).checked;
         } else {
             state.filters.brand = state.filters.brand.filter((item) => {
                 return item !== (e.target as HTMLInputElement).id;
             });
+            state.filters.checkedInputs[(e.target as HTMLInputElement).id] = false;
         }
         filterProducts();
         if (span) {

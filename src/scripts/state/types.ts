@@ -18,10 +18,12 @@ export interface IState {
     filters: {
         brand: string[];
         category: string[];
+        checkedInputs: { [key: string]: boolean };
         maxPrice: number;
         minPrice: number;
         minStock: number;
         maxStock: number;
+        sortValue: string;
     };
     availableCategoryCount: { [key: string]: number };
     availableBrandCount: { [key: string]: number };
