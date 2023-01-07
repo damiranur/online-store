@@ -128,6 +128,7 @@ select.addEventListener('change', function () {
         });
 
     updateProductsList();
+    state.filters.sortValue = select.value;
 });
 
 searchInput.addEventListener('change', function () {

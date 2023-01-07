@@ -1,5 +1,5 @@
 import { state } from './state';
-import { Product } from './types';
+import { Product, IState } from './types';
 import * as products from '../common/products.json';
 import { updateProductsList } from '../components/products/products';
 
@@ -22,6 +22,8 @@ export const updateUI = () => {
     updateStockFilter();
     updateProductsList();
     updateStat();
+    setCheckedBox();
+    setSortBy();
 };
 
 export const filterProducts = () => {
@@ -101,6 +103,9 @@ const updateCategoryFilter = () => {
             (checkboxWrapper.lastChild?.firstChild as HTMLElement).innerHTML = `(${
                 state.availableCategoryCount[name] || '0'
             }`;
+            (checkboxWrapper.lastChild?.lastChild as HTMLElement).innerHTML = `${
+                state.availableCategoryCount[name] || '0'
+            })`;
         } else {
             (checkboxWrapper.lastChild?.firstChild as HTMLElement).innerHTML = `(0`;
         }
@@ -122,6 +127,9 @@ const updateBrandFilter = () => {
             (checkboxWrapper.lastChild?.firstChild as HTMLElement).innerHTML = `(${
                 state.availableBrandCount[name] || '0'
             }`;
+            (checkboxWrapper.lastChild?.lastChild as HTMLElement).innerHTML = `${
+                state.availableBrandCount[name] || '0'
+            })`;
         } else {
             (checkboxWrapper.lastChild?.firstChild as HTMLElement).innerHTML = `(0`;
         }
@@ -193,3 +201,23 @@ export const clearFilteredProducts = () => {
     allCheckBoxes.forEach((checkbox) => ((checkbox as HTMLInputElement).checked = false));
     updateUI();
 };
+
+function setCheckedBox() {
+    const allCheckBoxes = document.querySelectorAll('input[type="checkbox"]');
+    allCheckBoxes.forEach((input) => {
+        (input as HTMLInputElement).checked = state.filters.checkedInputs[input.id];
+    });
+}
+
+function setSortBy() {
+    const selectElement = document.querySelector('select');
+    const options = selectElement?.childNodes;
+    const select = document.querySelector('.sort-name');
+
+    (select as HTMLSelectElement).value = state.filters.sortValue;
+    options?.forEach((option) => {
+        if ((option as HTMLOptionElement).value === state.filters.sortValue) {
+            (option as HTMLOptionElement).selected = true;
+        }
+    });
+}
