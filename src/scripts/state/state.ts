@@ -3,8 +3,8 @@ import { initialCategoryCount, initialBrandCount } from './actions';
 import { IState } from './types';
 import { updateUI } from './actions';
 let localStorageState = null;
-if (localStorage['state']) {
-    localStorageState = JSON.parse(localStorage['state']);
+if (window.localStorage['state']) {
+    localStorageState = JSON.parse(window.localStorage['state']);
 }
 const InitialState: IState = {
     products: products.products,
@@ -31,7 +31,7 @@ export const state: IState = localStorageState ? localStorageState : InitialStat
 
 window.addEventListener('load', updateUI);
 function setLocalStorage() {
-    localStorage.setItem('state', JSON.stringify(state));
-    localStorage.setItem('state', JSON.stringify(state));
+    window.localStorage.setItem('state', JSON.stringify(state));
+    window.localStorage.setItem('state', JSON.stringify(state));
 }
 window.addEventListener('beforeunload', setLocalStorage);

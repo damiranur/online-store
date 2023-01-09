@@ -2075,8 +2075,8 @@ const products = __importStar(__webpack_require__(/*! ../common/products.json */
 const actions_1 = __webpack_require__(/*! ./actions */ "./src/scripts/state/actions.ts");
 const actions_2 = __webpack_require__(/*! ./actions */ "./src/scripts/state/actions.ts");
 let localStorageState = null;
-if (localStorage['state']) {
-    localStorageState = JSON.parse(localStorage['state']);
+if (window.localStorage['state']) {
+    localStorageState = JSON.parse(window.localStorage['state']);
 }
 const InitialState = {
     products: products.products,
@@ -2101,8 +2101,8 @@ exports.state = localStorageState ? localStorageState : InitialState;
 // export const state: IState = InitialState;
 window.addEventListener('load', actions_2.updateUI);
 function setLocalStorage() {
-    localStorage.setItem('state', JSON.stringify(exports.state));
-    localStorage.setItem('state', JSON.stringify(exports.state));
+    window.localStorage.setItem('state', JSON.stringify(exports.state));
+    window.localStorage.setItem('state', JSON.stringify(exports.state));
 }
 window.addEventListener('beforeunload', setLocalStorage);
 
