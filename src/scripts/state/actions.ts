@@ -75,7 +75,14 @@ export const filterProducts = () => {
     });
 
     state.filteredProducts = filteredProducts;
-    state.filteredProducts = filteredProducts.filter((it) => it.title.indexOf(state.filters.search) + 1);
+    state.filteredProducts = filteredProducts.filter((it) => it.title.toLowerCase().indexOf(state.filters.search) + 1);
+    state.filteredProducts = filteredProducts.filter((it) => it.brand.toLowerCase().indexOf(state.filters.search) + 1);
+    state.filteredProducts = filteredProducts.filter(
+        (it) => it.category.toLowerCase().indexOf(state.filters.search) + 1
+    );
+    state.filteredProducts = filteredProducts.filter(
+        (it) => it.description.toLowerCase().indexOf(state.filters.search) + 1
+    );
 
     const availableCategoryCount = state.filteredProducts
         .map((product) => product.category)
