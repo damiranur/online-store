@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: calc(0.2rem + 1vw);
+    color: orange;
+    font-family: Philosopher, sans-serif;
+    word-wrap: break-word;
+}
+.filter__box {
+    border: 1px solid orange;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    margin-bottom: 5%;
+    display: block;
+}
+
+.filter__box h3 {
+    text-align: center;
+    background-color: #181a1c;
+    border-bottom: 1px solid orange;
+}
+
+.filter-list {
+    height: 10rem;
+    overflow: hidden;
+    overflow-y: auto;
+    background: rgba(76, 74, 65, 0.4);
+    padding: 2%;
+}

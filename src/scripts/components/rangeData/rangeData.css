@@ -1,0 +1,12 @@
+.out-data {
+    margin-top: 5%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    color: wheat;
+}
+.multi-range {
+    position: relative;
+    height: 2rem;
+    margin: 20px 0;
+}
