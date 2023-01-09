@@ -145,7 +145,6 @@ searchInput.addEventListener('change', function () {
 });
 
 smallV.addEventListener('click', function () {
-    console.log('click');
     const elem = document.querySelectorAll('.item');
     elem.forEach((element) => {
         element.classList.add('small-item');
@@ -157,11 +156,9 @@ smallV.addEventListener('click', function () {
     bigV.classList.remove('active-mode');
     smallV.classList.add('active-mode');
     state.viewMode = 'small-view';
-    console.log('state.viewMode', state.viewMode);
 });
 
 bigV.addEventListener('click', function () {
-    console.log('click');
     const elem = document.querySelectorAll('.item');
     elem.forEach((element) => {
         element.classList.remove('small-item');
@@ -173,5 +170,4 @@ bigV.addEventListener('click', function () {
     bigV.classList.add('active-mode');
     smallV.classList.remove('active-mode');
     state.viewMode = 'big-view';
-    console.log('state.viewMode big', state.viewMode);
 });
