@@ -197,7 +197,6 @@ const updateStat = () => {
 const updateViewMode = () => {
     const bigV = document.querySelector('.big-v');
     const smallV = document.querySelector('.small-v');
-    console.log('state.viewMode updateFunq', state.viewMode);
     if (state.viewMode === 'big-view') {
         bigV?.classList.add('active-mode');
         smallV?.classList.remove('active-mode');
@@ -212,7 +211,6 @@ const updateViewMode = () => {
     }
 
     if (state.viewMode === 'small-view') {
-        console.log('here ', state.viewMode, bigV);
         bigV?.classList.remove('active-mode');
         smallV?.classList.add('active-mode');
         const elem = document.querySelectorAll('.item');
