@@ -1839,7 +1839,10 @@ const filterProducts = () => {
         return item.stock <= state_1.state.filters.maxStock && item.stock >= state_1.state.filters.minStock;
     });
     state_1.state.filteredProducts = filteredProducts;
-    state_1.state.filteredProducts = filteredProducts.filter((it) => it.title.indexOf(state_1.state.filters.search) + 1);
+    state_1.state.filteredProducts = filteredProducts.filter((it) => it.title.toLowerCase().indexOf(state_1.state.filters.search) + 1);
+    state_1.state.filteredProducts = filteredProducts.filter((it) => it.brand.toLowerCase().indexOf(state_1.state.filters.search) + 1);
+    state_1.state.filteredProducts = filteredProducts.filter((it) => it.category.toLowerCase().indexOf(state_1.state.filters.search) + 1);
+    state_1.state.filteredProducts = filteredProducts.filter((it) => it.description.toLowerCase().indexOf(state_1.state.filters.search) + 1);
     const availableCategoryCount = state_1.state.filteredProducts
         .map((product) => product.category)
         .reduce((acc, el) => {
