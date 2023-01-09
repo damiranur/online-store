@@ -7,7 +7,7 @@ const InitialState: IState = {
     products: products.products,
     filteredProducts: products.products,
     searchedProducts: products.products,
-
+    viewMode: 'big-view',
     filters: {
         brand: [],
         category: [],

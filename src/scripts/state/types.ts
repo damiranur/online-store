@@ -16,6 +16,7 @@ export interface IState {
     products: Product[];
     filteredProducts: Product[];
     searchedProducts: Product[];
+    viewMode: string;
     filters: {
         brand: string[];
         category: string[];

@@ -20,10 +20,11 @@ export const updateUI = () => {
     updateBrandFilter();
     updatePriceFilter();
     updateStockFilter();
-    updateProductsList();
     updateStat();
     setCheckedBox();
     setSortBy();
+    updateViewMode();
+    updateProductsList();
 };
 
 export const filterProducts = () => {
@@ -193,15 +194,48 @@ const updateStat = () => {
     stat.textContent = `Found: ${state.filteredProducts.length}`;
 };
 
+const updateViewMode = () => {
+    const bigV = document.querySelector('.big-v');
+    const smallV = document.querySelector('.small-v');
+    console.log('state.viewMode updateFunq', state.viewMode);
+    if (state.viewMode === 'big-view') {
+        bigV?.classList.add('active-mode');
+        smallV?.classList.remove('active-mode');
+        const elem = document.querySelectorAll('.item');
+        elem.forEach((element) => {
+            element.classList.remove('small-item');
+        });
+        const itemInfo = document.querySelectorAll('.item-info-item');
+        itemInfo.forEach((elInfo) => {
+            elInfo.classList.remove('hidden');
+        });
+    }
+
+    if (state.viewMode === 'small-view') {
+        console.log('here ', state.viewMode, bigV);
+        bigV?.classList.remove('active-mode');
+        smallV?.classList.add('active-mode');
+        const elem = document.querySelectorAll('.item');
+        elem.forEach((element) => {
+            element.classList.add('small-item');
+        });
+        const itemInfo = document.querySelectorAll('.item-info-item');
+        itemInfo.forEach((elInfo) => {
+            elInfo.classList.add('hidden');
+        });
+    }
+};
+
 export const clearFilteredProducts = () => {
     state.filteredProducts = products.products;
+    state.filters.category = [];
+    state.filters.brand = [];
     state.availableCategoryCount = initialCategoryCount;
     state.availableBrandCount = initialBrandCount;
     state.filters.sortValue = 'sort-title';
     state.filters.search = '';
-    const allCheckBoxes = document.querySelectorAll('input[type="checkbox"]');
-    allCheckBoxes.forEach((checkbox) => ((checkbox as HTMLInputElement).checked = false));
-
+    state.filters.checkedInputs = {};
+    clearInput();
     updateUI();
 };
 
@@ -223,4 +257,11 @@ function setSortBy() {
             (option as HTMLOptionElement).selected = true;
         }
     });
+}
+
+function clearInput() {
+    const searchInput = document.querySelector('input[type="search"]');
+    if ((searchInput as HTMLInputElement).value != '') {
+        (searchInput as HTMLInputElement).value = '';
+    }
 }

@@ -50,6 +50,15 @@ function constructorProduct(el: Product): HTMLDivElement {
     itemButtons.append(addtocartBtn, detailsBtn);
     elem.classList.add('item');
     elem.dataset.id = String(el.id);
+    if (state?.viewMode === 'big-view') {
+        elem.classList.remove('small-item');
+        itemInfo.classList.remove('hidden');
+    }
+
+    if (state?.viewMode === 'small-view') {
+        elem.classList.add('small-item');
+        itemInfo.classList.add('hidden');
+    }
     return elem;
 }
 holder.className = 'products';
@@ -93,7 +102,7 @@ const smallV = document.createElement('div');
 smallV.className = 'small-v';
 smallV.innerHTML = '<div >.</div>'.repeat(36);
 const bigV = document.createElement('div');
-bigV.className = 'big-v active-mode';
+bigV.className = 'big-v';
 bigV.innerHTML = '<div >.</div>'.repeat(16);
 viewMode.append(smallV, bigV);
 SortProducts.append(SortBar, stat, searchBar, viewMode);
@@ -147,6 +156,8 @@ smallV.addEventListener('click', function () {
     });
     bigV.classList.remove('active-mode');
     smallV.classList.add('active-mode');
+    state.viewMode = 'small-view';
+    console.log('state.viewMode', state.viewMode);
 });
 
 bigV.addEventListener('click', function () {
@@ -161,4 +172,6 @@ bigV.addEventListener('click', function () {
     });
     bigV.classList.add('active-mode');
     smallV.classList.remove('active-mode');
+    state.viewMode = 'big-view';
+    console.log('state.viewMode big', state.viewMode);
 });
