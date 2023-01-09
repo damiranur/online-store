@@ -2,7 +2,10 @@ import * as products from '../common/products.json';
 import { initialCategoryCount, initialBrandCount } from './actions';
 import { IState } from './types';
 import { updateUI } from './actions';
-const localStorageState = JSON.parse(localStorage.getItem('state') ?? '');
+let localStorageState = null;
+if (localStorage['state']) {
+    localStorageState = JSON.parse(localStorage['state']);
+}
 const InitialState: IState = {
     products: products.products,
     filteredProducts: products.products,
@@ -23,7 +26,7 @@ const InitialState: IState = {
     availableBrandCount: initialBrandCount,
 };
 
-export const state: IState = localStorageState || InitialState;
+export const state: IState = localStorageState ? localStorageState : InitialState;
 // export const state: IState = InitialState;
 
 window.addEventListener('load', updateUI);

@@ -2069,13 +2069,15 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.state = void 0;
 const products = __importStar(__webpack_require__(/*! ../common/products.json */ "./src/scripts/common/products.json"));
 const actions_1 = __webpack_require__(/*! ./actions */ "./src/scripts/state/actions.ts");
 const actions_2 = __webpack_require__(/*! ./actions */ "./src/scripts/state/actions.ts");
-const localStorageState = JSON.parse((_a = localStorage.getItem('state')) !== null && _a !== void 0 ? _a : '');
+let localStorageState = null;
+if (localStorage['state']) {
+    localStorageState = JSON.parse(localStorage['state']);
+}
 const InitialState = {
     products: products.products,
     filteredProducts: products.products,
@@ -2095,7 +2097,7 @@ const InitialState = {
     availableCategoryCount: actions_1.initialCategoryCount,
     availableBrandCount: actions_1.initialBrandCount,
 };
-exports.state = localStorageState || InitialState;
+exports.state = localStorageState ? localStorageState : InitialState;
 // export const state: IState = InitialState;
 window.addEventListener('load', actions_2.updateUI);
 function setLocalStorage() {
